@@ -157,8 +157,10 @@ std::string AutohostInterface::TryBindSocket(
 
 		socket.bind(ip::udp::endpoint(localAddr, localPort));
 
-		boost::asio::socket_base::non_blocking_io command(true);
-		socket.io_control(command);
+		//libboost >1.57
+		//boost::asio::socket_base::non_blocking_io command(true);
+		//socket.io_control(command);
+		socket->non_blocking(true);
 
 		// A similar, slighly less verbose message is already in GameServer
 		//LOG("Connecting (UDP) to IP (v%i) %s Port %i",
